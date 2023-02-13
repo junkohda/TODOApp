@@ -13,7 +13,8 @@ class TaskListViewController: UIViewController {
     let tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.rowHeight = 470
+        table.rowHeight = 47
+        table.separatorStyle = .singleLine
         table.layer.backgroundColor = UIColor.white.cgColor
         table.tableFooterView = UIView(frame: .zero)
         return table
@@ -21,6 +22,7 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -30,6 +32,9 @@ class TaskListViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
         ])
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
         view.backgroundColor = .lightGray
         
     }
